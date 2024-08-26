@@ -10,11 +10,11 @@ function NavBar() {
   };
 
   return (
-    <nav className="bg-black text-white px-12 py-5">
+    <nav className="bg-black text-white px-8 py-2">
       <div className="flex items-center justify-between">
         {/* Logo and Text as Link */}
         <Link to="/" className="flex font-rubik items-center space-x-2">
-          <img src={logo} alt="PAOK Hub Logo" className="h-10 mr-2" />
+          <img src={logo} alt="PAOK Hub Logo" className="h-8 mr-2" />
           <span className="text-4xl">PAOK Hub</span>
         </Link>
 
@@ -36,7 +36,7 @@ function NavBar() {
         </div>
 
         {/* Desktop Menu */}
-        <ul className="hidden lg:flex space-x-6 text-xl">
+        <ul className="hidden lg:flex space-x-6">
           <li>
             <Link to="/">Home</Link>
           </li>
