@@ -14,7 +14,7 @@ function NavBar() {
       <div className="flex items-center justify-between">
         {/* Logo and Text as Link */}
         <Link to="/" className="flex font-rubik items-center space-x-2">
-          <img src={logo} alt="PAOK Hub Logo" className="h-8 mr-2" />
+          <img src={logo} alt="PAOK Hub Logo" className="h-8 mr-1" />
           <span className="text-4xl">PAOK Hub</span>
         </Link>
 
@@ -36,7 +36,7 @@ function NavBar() {
         </div>
 
         {/* Desktop Menu */}
-        <ul className="hidden lg:flex space-x-6">
+        <ul className="hidden lg:flex space-x-6 tex">
           <li>
             <Link to="/">Home</Link>
           </li>
