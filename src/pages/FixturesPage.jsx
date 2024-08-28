@@ -2,7 +2,9 @@ import NavBar from '../components/NavBar'
 
 function StatisticsPage() {
   return (
+    <>
     <NavBar />
+    </>
   )
 }
 

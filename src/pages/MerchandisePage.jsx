@@ -2,7 +2,9 @@ import NavBar from '../components/NavBar'
 
 function MerchandisePage() {
   return (
+    <>
     <NavBar />
+    </>
   )
 }
 
