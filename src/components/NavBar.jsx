@@ -34,19 +34,19 @@ function NavBar() {
         {/* Desktop Menu */}
         <ul className="hidden lg:flex space-x-6">
           <li>
-            <Link to="/" className="highlightTextOut" alt="Home">Home</Link>
+            <Link to="/" className="highlightTextOut transition-transform transform active:scale-90" alt="Home">Home</Link>
           </li>
           <li>
-            <Link to="/statistics" className="highlightTextOut" alt="Fixtures">Fixtures</Link>
+            <Link to="/statistics" className="highlightTextOut transition-transform transform active:scale-90" alt="Fixtures">Fixtures</Link>
           </li>
           <li>
-            <Link to="/gallery" className="highlightTextOut" alt="Gallery">Gallery</Link>
+            <Link to="/gallery" className="highlightTextOut transition-transform transform active:scale-90" alt="Gallery">Gallery</Link>
           </li>
           <li>
-            <Link to="/merchandise" className="highlightTextOut" alt="Merchandise">Merchandise</Link>
+            <Link to="/merchandise" className="highlightTextOut transition-transform transform active:scale-90" alt="Merchandise">Merchandise</Link>
           </li>
           <li>
-            <Link to="/contact" className="highlightTextOut" alt="Contact">Contact</Link>
+            <Link to="/contact" className="highlightTextOut transition-transform transform active:scale-90" alt="Contact">Contact</Link>
           </li>
         </ul>
       </div>
@@ -55,19 +55,19 @@ function NavBar() {
       {isMenuOpen && (
         <ul className="flex-col lg:hidden text-xl pt-4 transition-transform transform translate-y-0 duration-300 ease-in-out">
           <li className="py-2">
-            <Link to="/" className="highlightTextOut" alt="Home">Home</Link>
+            <Link to="/" className="highlightTextOut transition-transform transform active:scale-90" alt="Home">Home</Link>
           </li>
           <li className="py-2">
-            <Link to="/statistics" className="highlightTextOut" alt="Fixtures">Fixtures</Link>
+            <Link to="/statistics" className="highlightTextOut transition-transform transform active:scale-90" alt="Fixtures">Fixtures</Link>
           </li>
           <li className="py-2">
-            <Link to="/gallery" className="highlightTextOut" alt="Gallery">Gallery</Link>
+            <Link to="/gallery" className="highlightTextOut transition-transform transform active:scale-90" alt="Gallery">Gallery</Link>
           </li>
           <li className="py-2">
-            <Link to="/merchandise" className="highlightTextOut" alt="Merchandise">Merchandise</Link>
+            <Link to="/merchandise" className="highlightTextOut transition-transform transform active:scale-90" alt="Merchandise">Merchandise</Link>
           </li>
           <li className="py-2">
-            <Link to="/contact" className="highlightTextOut" alt="Contact">Contact</Link>
+            <Link to="/contact" className="highlightTextOut transition-transform transform active:scale-90" alt="Contact">Contact</Link>
           </li>
         </ul>
       )}
