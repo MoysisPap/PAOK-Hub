@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png'; // Import your logo image
 
@@ -20,59 +20,57 @@ function NavBar() {
 
         {/* Mobile Menu Button */}
         <div className="lg:hidden">
-          <button className="text-white" onClick={toggleMenu}>
-            <svg
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              className="w-6 h-6"
-            >
-              <path d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-          </button>
+          <div
+            id="nav-icon2"
+            className={isMenuOpen ? 'open' : ''}
+            onClick={toggleMenu}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
 
         {/* Desktop Menu */}
         <ul className="hidden lg:flex space-x-6">
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" className="highlightTextOut" alt="Home">Home</Link>
           </li>
           <li>
-            <Link to="/statistics">Fixtures</Link>
+            <Link to="/statistics" className="highlightTextOut" alt="Fixtures">Fixtures</Link>
           </li>
           <li>
-            <Link to="/gallery">Gallery</Link>
+            <Link to="/gallery" className="highlightTextOut" alt="Gallery">Gallery</Link>
           </li>
           <li>
-            <Link to="/merchandise">Merchandise</Link>
+            <Link to="/merchandise" className="highlightTextOut" alt="Merchandise">Merchandise</Link>
           </li>
           <li>
-            <Link to="/contact">Contact</Link>
+            <Link to="/contact" className="highlightTextOut" alt="Contact">Contact</Link>
           </li>
         </ul>
       </div>
-      {isMenuOpen ? (
-        <ul className="flex-col lg:hidden text-xl pt-4">
+
+      {/* Mobile Menu Items */}
+      {isMenuOpen && (
+        <ul className="flex-col lg:hidden text-xl pt-4 transition-transform transform translate-y-0 duration-300 ease-in-out">
           <li className="py-2">
-            <Link to="/">Home</Link>
+            <Link to="/" className="highlightTextOut" alt="Home">Home</Link>
           </li>
           <li className="py-2">
-            <Link to="/statistics">Fixtures</Link>
+            <Link to="/statistics" className="highlightTextOut" alt="Fixtures">Fixtures</Link>
           </li>
           <li className="py-2">
-            <Link to="/gallery">Gallery</Link>
+            <Link to="/gallery" className="highlightTextOut" alt="Gallery">Gallery</Link>
           </li>
           <li className="py-2">
-            <Link to="/merchandise">Merchandise</Link>
+            <Link to="/merchandise" className="highlightTextOut" alt="Merchandise">Merchandise</Link>
           </li>
           <li className="py-2">
-            <Link to="/contact">Contact</Link>
+            <Link to="/contact" className="highlightTextOut" alt="Contact">Contact</Link>
           </li>
         </ul>
-      ) : null}
+      )}
     </nav>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import largeVideoFile from '../assets/The Incredibles Movie-Teaser-Desktop.mp4';
 import smallVideoFile from '../assets/The Incredibles Movie-Teaser-Reel.mp4'
 
