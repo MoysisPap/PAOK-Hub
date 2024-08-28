@@ -10,7 +10,7 @@ function NavBar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-black bg-opacity-50 backdrop-blur-md text-white px-8 py-2 z-10">
+    <nav className="fixed top-0 left-0 w-full bg-black bg-opacity-50 backdrop-blur-md text-white px-4 sm:px-8 py-2 z-10">
       <div className="flex items-center justify-between">
         {/* Logo and Text as Link */}
         <Link to="/" className="flex font-rubik items-center space-x-2">

@@ -61,4 +61,32 @@
   opacity: 0;
 }
 
+/* NavBar.css */
+.highlightTextOut {
+  position: relative;
+  display: inline-block;
+  color: white; /* Default text color */
+  font-weight: normal; /* Default font weight */
+  transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out; /* Smooth transitions for color and font-weight */
+}
+
+.highlightTextOut::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: #F59E0B; /* Tailwind amber-400 color */
+  transition: width 0.3s ease-in-out; /* Smooth underline transition */
+}
+
+.highlightTextOut:hover {
+  color: #F59E0B; /* Change text color to amber-400 on hover */
+  font-weight: bold; /* Make text bold on hover */
+}
+
+.highlightTextOut:hover::after {
+  width: 100%; /* Expand underline on hover */
+}
 
