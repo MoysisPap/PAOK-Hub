@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'; // Import Link from React Router
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png'; // Import your logo image
 
 function NavBar() {
@@ -10,11 +10,11 @@ function NavBar() {
   };
 
   return (
-    <nav className="bg-black text-white px-8 py-2">
+    <nav className="fixed top-0 left-0 w-full bg-black bg-opacity-50 backdrop-blur-md text-white px-8 py-2 z-10">
       <div className="flex items-center justify-between">
         {/* Logo and Text as Link */}
         <Link to="/" className="flex font-rubik items-center space-x-2">
-          <img src={logo} alt="PAOK Hub Logo" className="h-8 mr-1" />
+          <img src={logo} alt="PAOK Hub Logo" className="h-8 mr-2" />
           <span className="text-4xl">PAOK Hub</span>
         </Link>
 
@@ -36,7 +36,7 @@ function NavBar() {
         </div>
 
         {/* Desktop Menu */}
-        <ul className="hidden lg:flex space-x-6 tex">
+        <ul className="hidden lg:flex space-x-6">
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -56,19 +56,19 @@ function NavBar() {
       </div>
       {isMenuOpen ? (
         <ul className="flex-col lg:hidden text-xl pt-4">
-          <li className='py-2'>
+          <li className="py-2">
             <Link to="/">Home</Link>
           </li>
-          <li className='py-2'>
+          <li className="py-2">
             <Link to="/statistics">Fixtures</Link>
           </li>
-          <li className='py-2'>
+          <li className="py-2">
             <Link to="/gallery">Gallery</Link>
           </li>
-          <li className='py-2'>
+          <li className="py-2">
             <Link to="/merchandise">Merchandise</Link>
           </li>
-          <li className='py-2'>
+          <li className="py-2">
             <Link to="/contact">Contact</Link>
           </li>
         </ul>

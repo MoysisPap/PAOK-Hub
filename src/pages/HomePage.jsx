@@ -1,9 +1,14 @@
-import NavBar from '../components/NavBar'
+import FullScreenVideo from '../components/FullScreenVideo';
+import NavBar from '../components/NavBar';
 
 function HomePage() {
   return (
-    <NavBar />
-  )
+    <div>
+      <NavBar />
+      <FullScreenVideo />
+    </div>
+  );
 }
 
 export default HomePage;
+
