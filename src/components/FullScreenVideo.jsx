@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import largeVideoFile from '../assets/The Incredibles Movie [Teaser I] - PAOK TV.mp4';
-import smallVideoFile from '../assets/Τα στιγμιότυπα του ΠΑΟΚ-Σάμροκ Ρόβερς - PAOK TV.mp4'; // Replace with the actual video file for small screens
+import largeVideoFile from '../assets/The Incredibles Movie-Teaser-Desktop.mp4';
+import smallVideoFile from '../assets/The Incredibles Movie-Teaser-Reel.mp4'
 
 function FullScreenVideo() {
   const [videoSrc, setVideoSrc] = useState(largeVideoFile);
