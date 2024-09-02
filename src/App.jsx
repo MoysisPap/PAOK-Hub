@@ -1,10 +1,12 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import StatisticsPage from './pages/FixturesPage';
+import StatisticsPage from './pages/StatisticsPage';
 import GalleryPage from './pages/GalleryPage';
 import MerchandisePage from './pages/MerchandisePage';
 import ContactPage from './pages/ContactPage';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 function App() {
   return <>

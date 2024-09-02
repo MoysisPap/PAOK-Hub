@@ -10,11 +10,11 @@ function NavBar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-black bg-opacity-50 backdrop-blur-md text-white px-4 sm:px-8 py-2 z-10">
+    <nav className="fixed top-0 left-0 w-full bg-black bg-opacity-60 backdrop-blur-md text-white px-4 sm:px-8 py-2 z-10">
       <div className="flex items-center justify-between">
         {/* Logo and Text as Link */}
         <Link to="/" className="flex font-rubik items-center space-x-2">
-          <img src={logo} alt="PAOK Hub Logo" className="h-8 mr-2" />
+          <img src={logo} alt="PAOK Hub Logo" className="h-8 mr-1" />
           <span className="text-4xl">PAOK Hub</span>
         </Link>
 
@@ -37,7 +37,7 @@ function NavBar() {
             <Link to="/" className="highlightTextOut transition-transform transform active:scale-90" alt="Home">Home</Link>
           </li>
           <li>
-            <Link to="/statistics" className="highlightTextOut transition-transform transform active:scale-90" alt="Fixtures">Fixtures</Link>
+            <Link to="/statistics" className="highlightTextOut transition-transform transform active:scale-90" alt="Statistics">Statistics</Link>
           </li>
           <li>
             <Link to="/gallery" className="highlightTextOut transition-transform transform active:scale-90" alt="Gallery">Gallery</Link>
