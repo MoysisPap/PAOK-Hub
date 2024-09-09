@@ -1,7 +1,7 @@
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-700 text-neutral-200 py-6">
+    <footer className="bg-[#1f0947] text-neutral-200 py-6">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top border */}
         <div className="w-full border-t-2 border-neutral-200 mb-4 mx-auto"></div> {/* Increased border width */}

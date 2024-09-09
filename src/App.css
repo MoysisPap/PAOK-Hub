@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply font-sans text-neutral-200 bg-neutral-950;
+    @apply font-sans  text-neutral-200 bg-neutral-950;
   }
 }
 /* global.css */
