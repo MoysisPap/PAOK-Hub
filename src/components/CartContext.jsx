@@ -1,4 +1,3 @@
-// src/contexts/CartContext.jsx
 import { createContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
@@ -13,7 +12,8 @@ const CartProvider = ({ children }) => {
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
       try {
-        setCart(JSON.parse(savedCart));
+        const parsedCart = JSON.parse(savedCart);
+        setCart(parsedCart);
       } catch (error) {
         console.error('Error parsing saved cart from localStorage:', error);
       }
@@ -22,7 +22,9 @@ const CartProvider = ({ children }) => {
 
   // Save cart to local storage
   useEffect(() => {
-    if (cart.length > 0) {
+    if (cart.length === 0) {
+      localStorage.removeItem('cart');
+    } else {
       localStorage.setItem('cart', JSON.stringify(cart));
     }
   }, [cart]);
@@ -51,7 +53,8 @@ const CartProvider = ({ children }) => {
         )
       );
     } else {
-      setCart(cart.filter((item) => item.id !== productId));
+      const updatedCart = cart.filter((item) => item.id !== productId);
+      setCart(updatedCart);
     }
   };
 
