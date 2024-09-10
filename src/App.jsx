@@ -5,20 +5,24 @@ import StatisticsPage from './pages/StatisticsPage';
 import GalleryPage from './pages/GalleryPage';
 import MerchandisePage from './pages/MerchandisePage';
 import ContactPage from './pages/ContactPage';
-import CheckoutPage from './pages/CheckoutPage';
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import CheckoutPage from './pages/CheckoutPage.jsx.jsx';
+import NavBar from './components/NavBar';
+import { CartProvider } from './components/CartContext.jsx';
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/statistics" element={<StatisticsPage />} />
-        <Route path="/gallery" element={<GalleryPage />} />
-        <Route path="/merchandise" element={<MerchandisePage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
-      </Routes>
+      <CartProvider>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/statistics" element={<StatisticsPage />} />
+          <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/merchandise" element={<MerchandisePage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+        </Routes>
+      </CartProvider>
     </Router>
   );
 }

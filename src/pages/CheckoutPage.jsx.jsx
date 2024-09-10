@@ -1,15 +1,15 @@
 import Footer from '../components/Footer';
 import NavBar from '../components/NavBar';
-import Products from '../components/Products';
+import CheckoutBoard from '../components/CheckoutBoard';
 
-function MerchandisePage() {
+function CheckoutPage() {
   return (
     <>
       <NavBar />
-      <Products />
+      <CheckoutBoard />
       <Footer />
     </>
   );
 }
 
-export default MerchandisePage;
+export default CheckoutPage;

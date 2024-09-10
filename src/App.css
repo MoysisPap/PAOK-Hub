@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply font-sans  text-neutral-200 bg-neutral-950;
+    @apply font-sans bg-black  text-neutral-100 bg-gradient-to-b from-[#080526] to-[#141a56];
   }
 }
 /* global.css */
