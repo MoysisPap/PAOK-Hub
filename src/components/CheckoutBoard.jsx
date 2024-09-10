@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const CheckoutBoard = () => {
   return (
-    <div className="mt-52 min-h-screen px-8 sm:px-24 md:px-28 lg:px-40 xl:px-64">
+    <div className="pt-52 min-h-screen px-8 sm:px-24 md:px-28 lg:px-40 xl:px-64">
       <h2 className="font-rubik text-3xl md:text-4xl text-center text-gray-100">
         Welcome to Checkout
       </h2>
@@ -22,7 +22,7 @@ const CheckoutBoard = () => {
             className="text-amber-400 hover:underline transition-all duration-300"
             aria-label="Visit the official PAOK FC Online Store"
           >
-            Official PAOK FC Online Store
+            PAOK FC Online Store
           </a>
           <span> or go </span>
           <Link
