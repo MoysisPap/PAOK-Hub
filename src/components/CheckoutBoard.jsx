@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const CheckoutBoard = () => {
   return (
-    <div className="pt-52 min-h-screen px-8 sm:px-24 md:px-28 lg:px-40 xl:px-64">
+    <div className="pt-48 sm:pt28 min-h-screen px-8 sm:px-24 md:px-28 lg:px-40 xl:px-64">
       <h2 className="font-rubik text-3xl md:text-4xl text-center text-gray-100">
         Welcome to Checkout
       </h2>

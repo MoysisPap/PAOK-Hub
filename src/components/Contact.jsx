@@ -5,7 +5,7 @@ function Contact() {
         className="flex flex-col mt-2 sm:mt-20 min-h-screen text-center justify-center items-center px-4"
       >
         {/* Main heading for the contact section */}
-        <h2 className="text-3xl sm:text-4xl font-bold my-4 sm:my-6 md:my-8">
+        <h2 className="text-3xl font-rubik sm:text-3xl my-4 sm:my-6 md:my-8">
           Contact
         </h2>
         <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 md:mb-8">

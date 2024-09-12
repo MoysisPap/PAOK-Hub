@@ -81,8 +81,8 @@ const Products = () => {
   const { addToCart } = useContext(CartContext);
 
   return (
-    <div className="container mx-auto px-20 pt-10">
-      <h1 className="text-4xl text-neutral-100 font-rubik text-center my-28">
+    <div className="container mx-auto px-20">
+      <h1 className="text-3xl text-neutral-100 font-rubik text-center my-28">
         Official PAOK Hub Merchandise
       </h1>
 
