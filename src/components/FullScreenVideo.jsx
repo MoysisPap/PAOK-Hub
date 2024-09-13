@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import largeVideoFile from '../assets/The Incredibles Movie-Teaser-Desktop.mp4';
-import smallVideoFile from '../assets/The Incredibles Movie-Teaser-Reel.mp4'
+import smallVideoFile from '../assets/The Incredibles Movie-Teaser-Reel.mp4';
 
 function FullScreenVideo() {
   const [videoSrc, setVideoSrc] = useState(largeVideoFile);
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 1150) {
+      // Switch video source based on window width
+      if (window.innerWidth < 900) {
         setVideoSrc(smallVideoFile);
       } else {
         setVideoSrc(largeVideoFile);
@@ -15,10 +16,10 @@ function FullScreenVideo() {
     };
 
     handleResize(); // Initial check when the component mounts
-    window.addEventListener('resize', handleResize); // Listen for resize events
+    window.addEventListener('resize', handleResize); // Add event listener for resize
 
     return () => {
-      window.removeEventListener('resize', handleResize); // Cleanup the event listener
+      window.removeEventListener('resize', handleResize); // Clean up event listener
     };
   }, []);
 
@@ -30,6 +31,7 @@ function FullScreenVideo() {
         autoPlay
         loop
         muted
+        aria-hidden="true" // Hide video from screen readers
       />
     </div>
   );
