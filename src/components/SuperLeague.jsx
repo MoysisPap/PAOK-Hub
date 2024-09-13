@@ -5,88 +5,57 @@ const SuperLeague = () => {
   const [scorers, setScorers] = useState([]);
   const [assists, setAssists] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null);  // Keep error state
+
+  const fetchDataWithCache = async (url, storageKey, setter) => {
+    const cachedData = localStorage.getItem(storageKey);
+    const cachedTimestamp = localStorage.getItem(`${storageKey}_timestamp`);
+
+    if (cachedData && cachedTimestamp && (Date.now() - cachedTimestamp) < 24 * 60 * 60 * 1000) {
+      setter(JSON.parse(cachedData));
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'x-rapidapi-host': 'v3.football.api-sports.io',
+          'x-rapidapi-key': import.meta.env.VITE_API_KEY
+        }
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      localStorage.setItem(storageKey, JSON.stringify(data.response));
+      localStorage.setItem(`${storageKey}_timestamp`, Date.now());
+      setter(data.response);
+    } catch (error) {
+      setError(`Failed to fetch ${storageKey}: ${error.message}`);  // Set error message
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchStandings = async () => {
-      try {
-        const response = await fetch('https://v3.football.api-sports.io/standings?league=197&season=2024', {
-          method: 'GET',
-          headers: {
-            'x-rapidapi-host': 'v3.football.api-sports.io',
-            'x-rapidapi-key': '21d7dcbc0d55c816620e87a05b6e41a5'
-          }
-        });
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setStandings(data.response[0].league.standings[0]);
-      } catch (error) {
-        setError('Failed to fetch standings');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    const fetchScorers = async () => {
-      try {
-        const response = await fetch('https://v3.football.api-sports.io/players/topscorers?season=2024&league=197', {
-          method: 'GET',
-          headers: {
-            'x-rapidapi-host': 'v3.football.api-sports.io',
-            'x-rapidapi-key': '21d7dcbc0d55c816620e87a05b6e41a5'
-          }
-        });
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setScorers(data.response.slice(0, 6)); // Display top 6 scorers
-      } catch (error) {
-        setError('Failed to fetch top scorers');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    const fetchAssists = async () => {
-      try {
-        const response = await fetch('https://v3.football.api-sports.io/players/topassists?season=2024&league=197', {
-          method: 'GET',
-          headers: {
-            'x-rapidapi-host': 'v3.football.api-sports.io',
-            'x-rapidapi-key': '21d7dcbc0d55c816620e87a05b6e41a5'
-          }
-        });
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setAssists(data.response.slice(0, 6)); // Display top 6 assists
-      } catch (error) {
-        setError('Failed to fetch top assists');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchStandings();
-    fetchScorers();
-    fetchAssists();
+    fetchDataWithCache('https://v3.football.api-sports.io/standings?league=197&season=2024', 'standings', data => setStandings(data[0].league.standings[0]));
+    fetchDataWithCache('https://v3.football.api-sports.io/players/topscorers?season=2024&league=197', 'scorers', data => setScorers(data.slice(0, 6)));
+    fetchDataWithCache('https://v3.football.api-sports.io/players/topassists?season=2024&league=197', 'assists', data => setAssists(data.slice(0, 6)));
   }, []);
 
   if (loading) return <div className="text-center p-4">Loading...</div>;
-  if (error) return <div className="text-center text-red-500 p-4">{error}</div>;
+  if (error) return <div className="text-center text-red-500 p-4">{error}</div>; 
 
   return (
     <div className="container mx-auto p-4">
-      {/* Title Inside the Board */}
+      {/* Title */}
       <div className="bg-white border border-gray-200 rounded-lg shadow-md mb-4 p-4">
         <h1 className="text-2xl font-bold text-center text-gray-800">Greek SuperLeague Standings</h1>
       </div>
 
-      {/* Desktop View for Standings */}
+      {/* Desktop Standings */}
       <div className="hidden md:block bg-white border border-gray-200 rounded-lg shadow-md overflow-x-auto mb-8">
         <table className="min-w-full bg-white border border-gray-200 rounded-lg">
           <thead>
@@ -121,7 +90,7 @@ const SuperLeague = () => {
         </table>
       </div>
 
-      {/* Mobile View for Standings */}
+      {/* Mobile Standings */}
       <div className="md:hidden">
         {standings.map(team => (
           <div key={team.team.id} className="bg-white border border-gray-200 rounded-lg shadow-md mb-4 p-4">
@@ -164,20 +133,10 @@ const SuperLeague = () => {
         ))}
       </div>
 
-      {/* Titles for Top Scorers and Top Assists */}
+      {/* Top Scorers and Assists */}
       <div className="flex flex-col md:flex-row gap-4 mb-8">
         <div className="flex-1 bg-white border border-gray-200 rounded-lg shadow-md p-4">
           <h2 className="text-2xl font-bold text-center text-gray-800">Top Scorers</h2>
-        </div>
-        <div className="flex-1 bg-white border border-gray-200 rounded-lg shadow-md p-4">
-          <h2 className="text-2xl font-bold text-center text-gray-800">Top Assists</h2>
-        </div>
-      </div>
-
-      {/* Top Scorers and Top Assists Sections */}
-      <div className="flex flex-col md:flex-row gap-4 mb-8">
-        {/* Top Scorers */}
-        <div className="flex-1 bg-white border border-gray-200 rounded-lg shadow-md p-4">
           {scorers.map(scorer => (
             <div key={scorer.player.id} className="flex items-center border-b pb-4">
               <img src={scorer.player.photo} alt={scorer.player.name} className="w-12 h-12 mr-4" />
@@ -190,8 +149,8 @@ const SuperLeague = () => {
           ))}
         </div>
 
-        {/* Top Assists */}
         <div className="flex-1 bg-white border border-gray-200 rounded-lg shadow-md p-4">
+          <h2 className="text-2xl font-bold text-center text-gray-800">Top Assists</h2>
           {assists.map(assist => (
             <div key={assist.player.id} className="flex items-center border-b pb-4">
               <img src={assist.player.photo} alt={assist.player.name} className="w-12 h-12 mr-4" />
