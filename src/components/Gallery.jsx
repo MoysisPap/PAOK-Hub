@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
+import { useState, useEffect, useRef } from 'react';
+import { BsChevronCompactLeft, BsChevronCompactRight, BsChevronCompactDown  } from 'react-icons/bs';
 import { RxDotFilled } from 'react-icons/rx';
 import YouTube from 'react-youtube';
 
@@ -45,6 +45,19 @@ function Gallery() {
 
   // Image Carousel State
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+
+  // Ref for the YouTube player instance
+  const playerRef = useRef(null);
+
+  // Cleanup player on unmount
+  useEffect(() => {
+    return () => {
+      if (playerRef.current) {
+        playerRef.current.destroy();
+      }
+    };
+  }, []);
 
   const prevImageSlide = () => {
     setCurrentImageIndex((prevIndex) =>
@@ -62,9 +75,6 @@ function Gallery() {
     setCurrentImageIndex(slideIndex);
   };
 
-  // Video Carousel State
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-
   const prevVideoSlide = () => {
     setCurrentVideoIndex((prevIndex) =>
       prevIndex === 0 ? videoSlides.length - 1 : prevIndex - 1
@@ -81,8 +91,13 @@ function Gallery() {
     setCurrentVideoIndex(slideIndex);
   };
 
+  const onReady = (event) => {
+    // Store player instance
+    playerRef.current = event.target;
+  };
+
   return (
-    <div className="max-w-[900px] m-auto p-4 pt-28 space-y-8">
+    <div className="max-w-[850px] m-auto p-4 pt-28 space-y-8">
       <h2 className="text-center text-3xl font-rubik">PAOK Hub Gallery</h2>
 
       {/* Video Carousel */}
@@ -98,6 +113,7 @@ function Gallery() {
               },
             }}
             className="absolute top-0 left-0 w-full h-full"
+            onReady={onReady}
             aria-label="Current video slide"
           />
         </div>
@@ -132,6 +148,9 @@ function Gallery() {
               <RxDotFilled />
             </button>
           ))}
+        </div>
+        <div className="hidden [@media(min-width:1000px)]:flex [@media(min-width:1300px)]:hidden justify-center items-center">
+          <BsChevronCompactDown size={30} className="text-gray-500" />
         </div>
       </div>
 
