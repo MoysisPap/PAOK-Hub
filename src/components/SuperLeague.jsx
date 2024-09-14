@@ -98,7 +98,7 @@ const SuperLeague = () => {
                 <td className="py-2 px-4 border-b flex items-center">
                   <img
                     src={team.team.logo}
-                    alt={team.team.name}
+                    alt={`Logo of ${team.team.name}`}
                     className="w-8 h-8 mr-2"
                   />
                   {team.team.name}
@@ -137,7 +137,7 @@ const SuperLeague = () => {
             <div className="flex items-center mb-4">
               <img
                 src={team.team.logo}
-                alt={team.team.name}
+                alt={`Logo of ${team.team.name}`}
                 className="w-12 h-12 mr-4"
               />
               <div>
@@ -206,7 +206,7 @@ const SuperLeague = () => {
             >
               <img
                 src={scorer.player.photo}
-                alt={scorer.player.name}
+                alt={`Photo of ${scorer.player.name}`}
                 className="w-12 h-12 mr-4"
               />
               <div className="flex-1">
@@ -233,7 +233,7 @@ const SuperLeague = () => {
             >
               <img
                 src={assist.player.photo}
-                alt={assist.player.name}
+                alt={`Photo of ${assist.player.name}`}
                 className="w-12 h-12 mr-4"
               />
               <div className="flex-1">
@@ -270,7 +270,7 @@ const SuperLeague = () => {
             >
               <img
                 src={scorer.player.photo}
-                alt={scorer.player.name}
+                alt={`Photo of ${scorer.player.name}`}
                 className="w-12 h-12 mr-4"
               />
               <div className="flex-1">
@@ -304,7 +304,7 @@ const SuperLeague = () => {
             >
               <img
                 src={assist.player.photo}
-                alt={assist.player.name}
+                alt={`Photo of ${assist.player.name}`}
                 className="w-12 h-12 mr-4"
               />
               <div className="flex-1">
@@ -326,8 +326,8 @@ const SuperLeague = () => {
         <p className="text-sm text-gray-100 text-center">
           The statistics data is provided by{' '}
           <a
-            href="https://www.api-sports.io/"
-            className="text-sky-600 hover:underline"
+            href="https://www.api-football.com/"
+            className="text-sky-500 hover:underline"
             target="_blank"
             rel="noopener noreferrer"
           >
