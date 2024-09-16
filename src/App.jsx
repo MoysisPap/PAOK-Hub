@@ -5,7 +5,7 @@ import StatisticsPage from './pages/StatisticsPage';
 import GalleryPage from './pages/GalleryPage';
 import MerchandisePage from './pages/MerchandisePage';
 import ContactPage from './pages/ContactPage';
-import CheckoutPage from './pages/CheckoutPage.jsx.jsx';
+import CheckoutPage from './pages/CheckoutPage.jsx';
 import NavBar from './components/NavBar';
 import { CartProvider } from './components/CartContext.jsx';
 
