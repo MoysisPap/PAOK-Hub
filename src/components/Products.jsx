@@ -3,19 +3,20 @@ import { useContext } from 'react';
 import { CartContext } from './CartContext.jsx';
 
 const products = [
-  { id: 1, name: 'Official 1st Home Jersey', price: 75, image: '/src/assets/product1.png' },
-  { id: 2, name: 'Official 2nd Home Jersey', price: 75, image: '/src/assets/product2.png' },
-  { id: 3, name: 'Official 1st Away Jersey', price: 75, image: '/src/assets/product3.png' },
-  { id: 4, name: 'Official 2nd Away Jersey', price: 75, image: '/src/assets/product4.png' },
-  { id: 5, name: 'PAOK FC Anthem Jacket', price: 70, image: '/src/assets/product5.png' },
-  { id: 6, name: 'PAOK FC Black Hoodie', price: 60, image: '/src/assets/product6.png' },
-  { id: 7, name: 'PAOK FC Travel Jacket', price: 120, image: '/src/assets/product7.png' },
-  { id: 8, name: 'T-shirt Champions 2024', price: 20, image: '/src/assets/product8.png' },
-  { id: 9, name: 'PAOK FC Black Pants', price: 40, image: '/src/assets/product9.png' },
-  { id: 10, name: 'PAOK FC Grey Beanie', price: 20, image: '/src/assets/product10.png' },
-  { id: 11, name: 'PAOK FC Black Cap 4', price: 30, image: '/src/assets/product11.png' },
-  { id: 12, name: 'Memorial Cup', price: 25, image: '/src/assets/product12.png' },
+  { id: 1, name: 'Official 1st Home Jersey', price: 75, image: '/public/src/assets/product1.png' },
+  { id: 2, name: 'Official 2nd Home Jersey', price: 75, image: '/public/src/assets/product2.png' },
+  { id: 3, name: 'Official 1st Away Jersey', price: 75, image: '/public/src/assets/product3.png' },
+  { id: 4, name: 'Official 2nd Away Jersey', price: 75, image: '/public/src/assets/product4.png' },
+  { id: 5, name: 'PAOK FC Anthem Jacket', price: 70, image: '/public/src/assets/product5.png' },
+  { id: 6, name: 'PAOK FC Black Hoodie', price: 60, image: '/public/src/assets/product6.png' },
+  { id: 7, name: 'PAOK FC Travel Jacket', price: 120, image: '/public/src/assets/product7.png' },
+  { id: 8, name: 'T-shirt Champions 2024', price: 20, image: '/public/src/assets/product8.png' },
+  { id: 9, name: 'PAOK FC Black Pants', price: 40, image: '/public/src/assets/product9.png' },
+  { id: 10, name: 'PAOK FC Grey Beanie', price: 20, image: '/public/src/assets/product10.png' },
+  { id: 11, name: 'PAOK FC Black Cap 4', price: 30, image: '/public/src/assets/product11.png' },
+  { id: 12, name: 'Memorial Cup', price: 25, image: '/public/src/assets/product12.png' },
 ];
+
 
 const Products = () => {
   const { addToCart } = useContext(CartContext);

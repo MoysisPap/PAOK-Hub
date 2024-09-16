@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart, FaBars } from 'react-icons/fa';
-import logo from '../assets/logo.png';
+import logo from '/public/assets/logo.png';
 import { CartContext } from './CartContext.jsx';
 
 function NavBar() {
