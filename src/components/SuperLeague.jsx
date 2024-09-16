@@ -72,7 +72,7 @@ const SuperLeague = () => {
       </h1>
 
       {/* Desktop Standings */}
-      <div className="bg-white border border-gray-200 rounded-lg shadow-md mb-4 p-4">
+      <div className="bg-white border border-gray-200 rounded-lg mx-4 md:mx-auto shadow-md mb-4 p-4">
         <h2 className="text-2xl font-bold text-gray-700 text-center">
           Greek Super League Standings
         </h2>
@@ -132,7 +132,7 @@ const SuperLeague = () => {
         {standings.map((team) => (
           <div
             key={team.team.id}
-            className="bg-white border border-gray-200 rounded-lg shadow-md mb-4 p-4"
+            className="bg-white border border-gray-200 rounded-lg shadow-md mx-4 mb-4 p-4"
           >
             <div className="flex items-center mb-4">
               <img
@@ -184,21 +184,21 @@ const SuperLeague = () => {
       {/* Desktop and larger view */}
       <div className="hidden md:grid md:grid-cols-2 gap-4 mb-8 mt-16">
         {/* Top Scorers Header */}
-        <div className="bg-white border border-gray-200 rounded-lg shadow-md p-4">
+        <div className="bg-white border border-gray-200 rounded-lg mx-4 sm:mx-0 shadow-md p-4">
           <h2 className="text-2xl font-bold text-center text-gray-800">
             Top Scorers
           </h2>
         </div>
 
         {/* Top Assists Header */}
-        <div className="bg-white border border-gray-200 rounded-lg shadow-md p-4">
+        <div className="bg-white border border-gray-200 rounded-lg mx-4 sm:mx-0 shadow-md p-4">
           <h2 className="text-2xl font-bold text-center text-gray-800">
             Top Assists
           </h2>
         </div>
 
         {/* Top Scorers Content */}
-        <div className="bg-white border border-gray-200 rounded-lg shadow-md p-4">
+        <div className="bg-white border border-gray-200 rounded-lg mx-4 sm:mx-0 shadow-md p-4">
           {scorers.map((scorer) => (
             <div
               key={scorer.player.id}
@@ -225,7 +225,7 @@ const SuperLeague = () => {
         </div>
 
         {/* Top Assists Content */}
-        <div className="bg-white border border-gray-200 rounded-lg shadow-md p-4">
+        <div className="bg-white border border-gray-200 rounded-lg mx-4 sm:mx-0 shadow-md p-4">
           {assists.map((assist) => (
             <div
               key={assist.player.id}
@@ -255,14 +255,14 @@ const SuperLeague = () => {
       {/* Mobile view */}
       <div className="md:hidden space-y-4 mb-8">
         {/* Top Scorers Header */}
-        <div className="bg-white border border-gray-200 mt-16 rounded-lg shadow-md p-4">
+        <div className="bg-white border border-gray-200 mt-16 rounded-lg mx-4 sm:mx-0 shadow-md p-4">
           <h2 className="text-2xl font-bold text-center text-gray-800">
             Top Scorers
           </h2>
         </div>
 
         {/* Top Scorers Content */}
-        <div className="bg-white border border-gray-200 rounded-lg shadow-md p-4">
+        <div className="bg-white border border-gray-200 rounded-lg mx-4 sm:mx-0 shadow-md p-4">
           {scorers.map((scorer) => (
             <div
               key={scorer.player.id}
@@ -289,14 +289,14 @@ const SuperLeague = () => {
         </div>
 
         {/* Top Assists Header */}
-        <div className="bg-white border border-gray-200 rounded-lg shadow-md p-4">
+        <div className="bg-white border border-gray-200 rounded-lg mx-4 sm:mx-0 shadow-md p-4">
           <h2 className="text-2xl font-bold text-center text-gray-800">
             Top Assists
           </h2>
         </div>
 
         {/* Top Assists Content */}
-        <div className="bg-white border border-gray-200 rounded-lg shadow-md p-4">
+        <div className="bg-white border border-gray-200 rounded-lg mx-4 sm:mx-0 shadow-md p-4">
           {assists.map((assist) => (
             <div
               key={assist.player.id}
