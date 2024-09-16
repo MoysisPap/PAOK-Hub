@@ -149,32 +149,32 @@ const SuperLeague = () => {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="text-center">
-                <h3 className="text-lg font-medium text-gray-800">Points</h3>
-                <p className="text-xl text-gray-800">{team.points}</p>
+                <h3 className="text-sm font-medium text-gray-800">Points</h3>
+                <p className=" text-gray-800">{team.points}</p>
               </div>
               <div className="text-center">
-                <h3 className="text-lg font-medium text-gray-800">
+                <h3 className="text-sm font-medium text-gray-800">
                   Goals Diff
                 </h3>
-                <p className="text-xl text-gray-800">{team.goalsDiff}</p>
+                <p className=" text-gray-800">{team.goalsDiff}</p>
               </div>
             </div>
             <div className="mt-4 grid grid-cols-2 gap-4">
               <div className="text-center">
-                <h3 className="text-lg font-medium text-gray-800">Played</h3>
-                <p className="text-xl text-gray-800">{team.all.played}</p>
+                <h3 className="text-sm font-medium text-gray-800">Played</h3>
+                <p className=" text-gray-800">{team.all.played}</p>
               </div>
               <div className="text-center">
-                <h3 className="text-lg font-medium text-gray-800">Wins</h3>
-                <p className="text-xl text-gray-800">{team.all.win}</p>
+                <h3 className="text-sm font-medium text-gray-800">Wins</h3>
+                <p className=" text-gray-800">{team.all.win}</p>
               </div>
               <div className="text-center">
-                <h3 className="text-lg font-medium text-gray-800">Draws</h3>
-                <p className="text-xl text-gray-800">{team.all.draw}</p>
+                <h3 className="text-sm font-medium text-gray-800">Draws</h3>
+                <p className=" text-gray-800">{team.all.draw}</p>
               </div>
               <div className="text-center">
-                <h3 className="text-lg font-medium text-gray-800">Losses</h3>
-                <p className="text-xl text-gray-800">{team.all.lose}</p>
+                <h3 className="text-sm font-medium text-gray-800">Losses</h3>
+                <p className=" text-gray-800">{team.all.lose}</p>
               </div>
             </div>
           </div>
