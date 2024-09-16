@@ -29,7 +29,7 @@ Explore the ultimate PAOK Football Club fan website! Discover football stats, sh
 - **Deployment:** Netlify
 
 ## Live Website
-- **Visit my portfolio:** <a href="" target="_blank" rel="noopener noreferrer"></a>
+- **Visit my portfolio:** <a href="https://paok-hub.netlify.app/" target="_blank" rel="noopener noreferrer">https://paok-hub.netlify.app/</a>
 
 
 ## License
