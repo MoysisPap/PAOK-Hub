@@ -7,13 +7,15 @@ import MerchandisePage from './pages/MerchandisePage';
 import ContactPage from './pages/ContactPage';
 import CheckoutPage from './pages/CheckoutPage.jsx';
 import NavBar from './components/NavBar';
-import { CartProvider } from './components/CartContext.jsx';
+import { CartProvider } from './components/CartContext';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <Router>
       <CartProvider>
         <NavBar />
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/statistics" element={<StatisticsPage />} />
