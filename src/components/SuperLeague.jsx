@@ -330,6 +330,7 @@ const SuperLeague = () => {
             className="text-sky-500 hover:underline"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="API Football Website - opens in a new tab"
           >
             api-football
           </a>{' '}

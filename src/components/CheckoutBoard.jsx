@@ -25,7 +25,7 @@ const CheckoutBoard = () => {
             href="https://store.paokfc.gr/en/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-amber-400 hover:underline transition-all duration-300"
+            className="text-sky-500 hover:underline transition-all duration-300"
             aria-label="Visit the official PAOK FC Online Store"
           >
             PAOK FC Online Store
@@ -34,7 +34,7 @@ const CheckoutBoard = () => {
           {/* Link to navigate back to Merchandise Page */}
           <Link
             to="/merchandise"
-            className="text-amber-400 hover:underline transition-all duration-300"
+            className="text-red-500 hover:underline transition-all duration-300"
             aria-label="Go back to Merchandise Page"
           >
             back
