@@ -323,7 +323,7 @@ const SuperLeague = () => {
         </div>
       </div>
       <div className='py-12'>
-        <p className="text-sm text-gray-100 text-center">
+        <p className="text-base text-gray-100 text-center">
           The statistics data is provided by{' '}
           <a
             href="https://www.api-football.com/"
