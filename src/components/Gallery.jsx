@@ -1,46 +1,47 @@
-import { useState, useEffect, useRef } from 'react';
-import { BsChevronCompactLeft, BsChevronCompactRight, BsChevronCompactDown  } from 'react-icons/bs';
-import { RxDotFilled } from 'react-icons/rx';
-import YouTube from 'react-youtube';
+import { useState, useEffect, useRef } from "react";
+import {
+  BsChevronCompactLeft,
+  BsChevronCompactRight,
+  BsChevronCompactDown,
+} from "react-icons/bs";
+import { RxDotFilled } from "react-icons/rx";
+import YouTube from "react-youtube";
 
 function Gallery() {
   // Image Carousel Data
   const imageSlides = [
+    { url: "https://www.sportime.gr/wp-content/uploads/2024/05/4276198.jpg" },
     {
-      url: 'https://sportena.gr/wp-content/uploads/2023/03/aris_paok_prognostika_scorakias.jpg',
-    },
-    { url: 'https://www.sportime.gr/wp-content/uploads/2024/05/4276198.jpg' },
-    {
-      url: 'https://sportday.gr/images/2024/05/19/sportday_20240519220634_174847-960x640.jpg',
+      url: "https://sportday.gr/images/2024/05/19/sportday_20240519220634_174847-960x640.jpg",
     },
     {
-      url: 'https://www.cretapost.gr/wp-content/uploads/2024/05/paok_nea_mesa_190524.jpg',
+      url: "https://www.cretapost.gr/wp-content/uploads/2024/05/paok_nea_mesa_190524.jpg",
     },
     {
-      url: 'https://s2.aek365.org/uploads/articles/images/5/523cb19e30be6b19e61f87dfc3b80300_991707.jpg',
+      url: "https://s2.aek365.org/uploads/articles/images/5/523cb19e30be6b19e61f87dfc3b80300_991707.jpg",
     },
     {
-      url: 'https://s2.aek365.org/uploads/articles/images/a/ab39c12939f648bc717c31a94cb369f4_991707.jpg',
+      url: "https://s2.aek365.org/uploads/articles/images/a/ab39c12939f648bc717c31a94cb369f4_991707.jpg",
     },
     {
-      url: 'https://www.newsit.gr/wp-content/uploads/2024/05/paok2-1-1200x800.jpg',
+      url: "https://www.newsit.gr/wp-content/uploads/2024/05/paok2-1-1200x800.jpg",
     },
-    { url: 'https://www.slgr.gr/superleaguestorage/2024/5/2068_6226425.jpg' },
+    { url: "https://www.slgr.gr/superleaguestorage/2024/5/2068_6226425.jpg" },
     {
-      url: 'https://cdn.ethnos.gr/resources/images/2c6ef54a-ad6a-4e5e-a609-45fa16f1d443.jpg',
-    },
-    {
-      url: 'https://www.athensvoice.gr/images/1074x600/jpg/sites/default/files/article/2019/04/22/2130951_1_1.jpg',
+      url: "https://cdn.ethnos.gr/resources/images/2c6ef54a-ad6a-4e5e-a609-45fa16f1d443.jpg",
     },
     {
-      url: 'https://primesport.gr/wp-content/uploads/2024/05/paok-badounas.jpg',
+      url: "https://www.athensvoice.gr/images/1074x600/jpg/sites/default/files/article/2019/04/22/2130951_1_1.jpg",
+    },
+    {
+      url: "https://primesport.gr/wp-content/uploads/2024/05/paok-badounas.jpg",
     },
   ];
 
   const videoSlides = [
-    { id: '89ZDjVX2yq4' },
-    { id: 'kvoUzHtx8yM' },
-    { id: 'uAHVEJLd-8Y' },
+    { id: "89ZDjVX2yq4" },
+    { id: "kvoUzHtx8yM" },
+    { id: "uAHVEJLd-8Y" },
   ];
 
   // Image Carousel State
@@ -106,8 +107,8 @@ function Gallery() {
           <YouTube
             videoId={videoSlides[currentVideoIndex].id}
             opts={{
-              width: '100%',
-              height: '100%',
+              width: "100%",
+              height: "100%",
               playerVars: {
                 autoplay: 0,
               },
@@ -140,8 +141,8 @@ function Gallery() {
               onClick={() => goToVideoSlide(slideIndex)}
               className={`text-2xl cursor-pointer ${
                 slideIndex === currentVideoIndex
-                  ? 'text-white'
-                  : 'text-gray-500'
+                  ? "text-white"
+                  : "text-gray-500"
               }`}
               aria-label={`Go to video slide ${slideIndex + 1}`}
             >
@@ -186,8 +187,8 @@ function Gallery() {
               onClick={() => goToImageSlide(slideIndex)}
               className={`text-2xl cursor-pointer ${
                 slideIndex === currentImageIndex
-                  ? 'text-white'
-                  : 'text-gray-500'
+                  ? "text-white"
+                  : "text-gray-500"
               }`}
               aria-label={`Go to image slide ${slideIndex + 1}`}
             >
