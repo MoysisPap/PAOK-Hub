@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 const SuperLeague = () => {
   const [standings, setStandings] = useState([]);
-  const [scorers, setScorers] = useState([]);
-  const [assists, setAssists] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); // Keep error state
+  const [error, setError] = useState(null);
 
   const fetchDataWithCache = async (url, storageKey, setter) => {
     const cachedData = localStorage.getItem(storageKey);
@@ -16,6 +14,7 @@ const SuperLeague = () => {
       cachedTimestamp &&
       Date.now() - cachedTimestamp < 24 * 60 * 60 * 1000
     ) {
+      // Use cached data if it exists and is less than 24 hours old
       setter(JSON.parse(cachedData));
       setLoading(false);
       return;
@@ -23,41 +22,40 @@ const SuperLeague = () => {
 
     try {
       const response = await fetch(url, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'x-rapidapi-host': 'v3.football.api-sports.io',
-          'x-rapidapi-key': import.meta.env.VITE_API_KEY,
+          "X-Api-Key": "7083bcc646ee421da3b53a90c205b78d", // Directly added API key
         },
       });
+
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
+
       const data = await response.json();
-      localStorage.setItem(storageKey, JSON.stringify(data.response));
+
+      // Log the data to check structure (only for debugging)
+      console.log(data);
+
+      // Assuming data.standings[0].table is the correct path
+      localStorage.setItem(storageKey, JSON.stringify(data.standings[0].table));
       localStorage.setItem(`${storageKey}_timestamp`, Date.now());
-      setter(data.response);
+
+      // Update the standings state with the fetched data
+      setter(data.standings[0].table);
     } catch (error) {
-      setError(`Failed to fetch ${storageKey}: ${error.message}`); // Set error message
+      setError(`Failed to fetch standings: ${error.message}`);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
+    // Fetch the standings on component mount
     fetchDataWithCache(
-      'https://v3.football.api-sports.io/standings?league=197&season=2024',
-      'standings',
-      (data) => setStandings(data[0].league.standings[0])
-    );
-    fetchDataWithCache(
-      'https://v3.football.api-sports.io/players/topscorers?season=2024&league=197',
-      'scorers',
-      (data) => setScorers(data.slice(0, 6))
-    );
-    fetchDataWithCache(
-      'https://v3.football.api-sports.io/players/topassists?season=2024&league=197',
-      'assists',
-      (data) => setAssists(data.slice(0, 6))
+      "https://api.football-data.org/v4/competitions/PL/standings?season=2024", // Update endpoint if necessary
+      "standings",
+      (data) => setStandings(data)
     );
   }, []);
 
@@ -71,10 +69,10 @@ const SuperLeague = () => {
         PAOK Hub Statistics
       </h1>
 
-      {/* Desktop Standings */}
+      {/* Standings Table for Desktop */}
       <div className="bg-white border border-gray-200 rounded-lg mx-4 md:mx-auto shadow-md mb-4 p-4">
         <h2 className="text-2xl font-bold text-gray-700 text-center">
-          Greek Super League Standings
+          Premier League Standings
         </h2>
       </div>
       <div className="hidden md:block bg-white border border-gray-200 rounded-lg shadow-md overflow-x-auto mb-8">
@@ -94,10 +92,12 @@ const SuperLeague = () => {
           <tbody>
             {standings.map((team) => (
               <tr key={team.team.id}>
-                <td className="py-2 px-4 border-b text-center">{team.rank}</td>
+                <td className="py-2 px-4 border-b text-center">
+                  {team.position}
+                </td>
                 <td className="py-2 px-4 border-b flex items-center">
                   <img
-                    src={team.team.logo}
+                    src={team.team.crest}
                     alt={`Logo of ${team.team.name}`}
                     className="w-8 h-8 mr-2"
                   />
@@ -107,20 +107,14 @@ const SuperLeague = () => {
                   {team.points}
                 </td>
                 <td className="py-2 px-4 border-b text-center">
-                  {team.goalsDiff}
+                  {team.goalDifference}
                 </td>
                 <td className="py-2 px-4 border-b text-center">
-                  {team.all.played}
+                  {team.playedGames}
                 </td>
-                <td className="py-2 px-4 border-b text-center">
-                  {team.all.win}
-                </td>
-                <td className="py-2 px-4 border-b text-center">
-                  {team.all.draw}
-                </td>
-                <td className="py-2 px-4 border-b text-center">
-                  {team.all.lose}
-                </td>
+                <td className="py-2 px-4 border-b text-center">{team.won}</td>
+                <td className="py-2 px-4 border-b text-center">{team.draw}</td>
+                <td className="py-2 px-4 border-b text-center">{team.lost}</td>
               </tr>
             ))}
           </tbody>
@@ -136,7 +130,7 @@ const SuperLeague = () => {
           >
             <div className="flex items-center mb-4">
               <img
-                src={team.team.logo}
+                src={team.team.crest}
                 alt={`Logo of ${team.team.name}`}
                 className="w-12 h-12 mr-4"
               />
@@ -144,7 +138,7 @@ const SuperLeague = () => {
                 <h2 className="text-xl font-semibold text-gray-800">
                   {team.team.name}
                 </h2>
-                <p className="text-gray-600">Rank: {team.rank}</p>
+                <p className="text-gray-600">Rank: {team.position}</p>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -156,186 +150,21 @@ const SuperLeague = () => {
                 <h3 className="text-sm font-medium text-gray-800">
                   Goals Diff
                 </h3>
-                <p className=" text-gray-800">{team.goalsDiff}</p>
+                <p className=" text-gray-800">{team.goalDifference}</p>
               </div>
             </div>
             <div className="mt-4 grid grid-cols-2 gap-4">
               <div className="text-center">
                 <h3 className="text-sm font-medium text-gray-800">Played</h3>
-                <p className=" text-gray-800">{team.all.played}</p>
+                <p className=" text-gray-800">{team.playedGames}</p>
               </div>
               <div className="text-center">
                 <h3 className="text-sm font-medium text-gray-800">Wins</h3>
-                <p className=" text-gray-800">{team.all.win}</p>
-              </div>
-              <div className="text-center">
-                <h3 className="text-sm font-medium text-gray-800">Draws</h3>
-                <p className=" text-gray-800">{team.all.draw}</p>
-              </div>
-              <div className="text-center">
-                <h3 className="text-sm font-medium text-gray-800">Losses</h3>
-                <p className=" text-gray-800">{team.all.lose}</p>
+                <p className=" text-gray-800">{team.won}</p>
               </div>
             </div>
           </div>
         ))}
-      </div>
-
-      {/* Desktop and larger view */}
-      <div className="hidden md:grid md:grid-cols-2 gap-4 mb-8 mt-16">
-        {/* Top Scorers Header */}
-        <div className="bg-white border border-gray-200 rounded-lg mx-4 sm:mx-0 shadow-md p-4">
-          <h2 className="text-2xl font-bold text-center text-gray-800">
-            Top Scorers
-          </h2>
-        </div>
-
-        {/* Top Assists Header */}
-        <div className="bg-white border border-gray-200 rounded-lg mx-4 sm:mx-0 shadow-md p-4">
-          <h2 className="text-2xl font-bold text-center text-gray-800">
-            Top Assists
-          </h2>
-        </div>
-
-        {/* Top Scorers Content */}
-        <div className="bg-white border border-gray-200 rounded-lg mx-4 sm:mx-0 shadow-md p-4">
-          {scorers.map((scorer) => (
-            <div
-              key={scorer.player.id}
-              className="flex items-center border-b pb-4"
-            >
-              <img
-                src={scorer.player.photo}
-                alt={`Photo of ${scorer.player.name}`}
-                className="w-12 h-12 mr-4"
-              />
-              <div className="flex-1">
-                <h3 className="text-lg font-semibold text-gray-800">
-                  {scorer.player.name}
-                </h3>
-                <p className="text-sm text-gray-600">
-                  {scorer.statistics[0].team.name}
-                </p>
-                <p className="text-sm text-gray-600">
-                  {scorer.statistics[0].goals.total} Goals
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Top Assists Content */}
-        <div className="bg-white border border-gray-200 rounded-lg mx-4 sm:mx-0 shadow-md p-4">
-          {assists.map((assist) => (
-            <div
-              key={assist.player.id}
-              className="flex items-center border-b pb-4"
-            >
-              <img
-                src={assist.player.photo}
-                alt={`Photo of ${assist.player.name}`}
-                className="w-12 h-12 mr-4"
-              />
-              <div className="flex-1">
-                <h3 className="text-lg font-semibold text-gray-800">
-                  {assist.player.name}
-                </h3>
-                <p className="text-sm text-gray-600">
-                  {assist.statistics[0].team.name}
-                </p>
-                <p className="text-sm text-gray-600">
-                  {assist.statistics[0].goals.assists} Assists
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Mobile view */}
-      <div className="md:hidden space-y-4 mb-8">
-        {/* Top Scorers Header */}
-        <div className="bg-white border border-gray-200 mt-16 rounded-lg mx-4 sm:mx-0 shadow-md p-4">
-          <h2 className="text-2xl font-bold text-center text-gray-800">
-            Top Scorers
-          </h2>
-        </div>
-
-        {/* Top Scorers Content */}
-        <div className="bg-white border border-gray-200 rounded-lg mx-4 sm:mx-0 shadow-md p-4">
-          {scorers.map((scorer) => (
-            <div
-              key={scorer.player.id}
-              className="flex items-center border-b pb-4"
-            >
-              <img
-                src={scorer.player.photo}
-                alt={`Photo of ${scorer.player.name}`}
-                className="w-12 h-12 mr-4"
-              />
-              <div className="flex-1">
-                <h3 className="text-lg font-semibold text-gray-800">
-                  {scorer.player.name}
-                </h3>
-                <p className="text-sm text-gray-600">
-                  {scorer.statistics[0].team.name}
-                </p>
-                <p className="text-sm text-gray-600">
-                  {scorer.statistics[0].goals.total} Goals
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Top Assists Header */}
-        <div className="bg-white border border-gray-200 rounded-lg mx-4 sm:mx-0 shadow-md p-4">
-          <h2 className="text-2xl font-bold text-center text-gray-800">
-            Top Assists
-          </h2>
-        </div>
-
-        {/* Top Assists Content */}
-        <div className="bg-white border border-gray-200 rounded-lg mx-4 sm:mx-0 shadow-md p-4">
-          {assists.map((assist) => (
-            <div
-              key={assist.player.id}
-              className="flex items-center border-b pb-4"
-            >
-              <img
-                src={assist.player.photo}
-                alt={`Photo of ${assist.player.name}`}
-                className="w-12 h-12 mr-4"
-              />
-              <div className="flex-1">
-                <h3 className="text-lg font-semibold text-gray-800">
-                  {assist.player.name}
-                </h3>
-                <p className="text-sm text-gray-600">
-                  {assist.statistics[0].team.name}
-                </p>
-                <p className="text-sm text-gray-600">
-                  {assist.statistics[0].goals.assists} Assists
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className='py-12'>
-        <p className="text-base text-gray-100 text-center">
-          The statistics data is provided by{' '}
-          <a
-            href="https://www.api-football.com/"
-            className="text-sky-500 hover:underline"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="API Football Website - opens in a new tab"
-          >
-            api-football
-          </a>{' '}
-          and is updated every 24 hours.
-        </p>
       </div>
     </div>
   );
