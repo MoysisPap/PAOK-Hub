@@ -11,10 +11,12 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/football-api/, ""),
-        // Optional: Add the API key here, but you'll need to use headers when calling this proxy
-        // headers: {
-        //   "X-Auth-Token": process.env.VITE_API_KEY,
-        // },
+        // Using environment variable for the API key
+        configure: (proxy) => {
+          proxy.on("proxyReq", (proxyReq, req, res) => {
+            proxyReq.setHeader("X-Auth-Token", process.env.VITE_API_KEY);
+          });
+        },
       },
     },
   },
