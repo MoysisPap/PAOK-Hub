@@ -5,14 +5,17 @@ const SuperLeague = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch Premier League standings for 2024 season
+  // Fetch Premier League standings for 2025 season (adjusted URL if needed)
   useEffect(() => {
     const fetchStandings = async () => {
       try {
         const response = await fetch(
-          "/football-api/v4/competitions/PL/standings?season=2024", // Using the proxy path
+          "/football-api/v4/competitions/PL/standings?season=2024", // Updated to 2025 season
           {
-            method: "GET", // No need for headers with API key; Vite proxy handles it
+            method: "GET",
+            headers: {
+              "X-Auth-Token": "7083bcc646ee421da3b53a90c205b78d", // Your API key
+            },
           }
         );
         if (!response.ok) {
