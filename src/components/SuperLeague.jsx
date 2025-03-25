@@ -8,15 +8,8 @@ const SuperLeague = () => {
   useEffect(() => {
     const fetchStandings = async () => {
       try {
-        const response = await fetch(
-          "https://api.football-data.org/v4/competitions/PL/standings?season=2024",
-          {
-            method: "GET",
-            headers: {
-              "X-Auth-Token": import.meta.env.VITE_API_KEY,
-            },
-          }
-        );
+        // Update this URL to call the Netlify function (proxy)
+        const response = await fetch("/.netlify/functions/proxy");
 
         if (!response.ok) {
           throw new Error(`Failed to fetch standings: ${response.status}`);
