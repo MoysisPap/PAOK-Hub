@@ -1,16 +1,17 @@
 // netlify/functions/proxy.js
 
-const fetch = require("node-fetch"); // Importing fetch to make requests
+import fetch from "node-fetch"; // Import fetch to make requests
 
-exports.handler = async (event, context) => {
+export const handler = async (event, context) => {
   const url =
     "https://api.football-data.org/v4/competitions/PL/standings?season=2024"; // API URL
 
   const headers = {
-    "X-Auth-Token": "YOUR_API_KEY", // Replace this with your actual API key
+    "X-Auth-Token": process.env.FOOTBALL_API_KEY, // Use environment variable for API key
   };
 
   try {
+    // Make the request to the external API
     const response = await fetch(url, { headers });
     const data = await response.json();
 
@@ -21,7 +22,7 @@ exports.handler = async (event, context) => {
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Failed to fetch standings" }),
+      body: JSON.stringify({ error: "Failed to fetch standings" }), // Handle errors
     };
   }
 };
