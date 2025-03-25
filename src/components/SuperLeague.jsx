@@ -8,7 +8,7 @@ const SuperLeague = () => {
   useEffect(() => {
     const fetchStandings = async () => {
       try {
-        // Update this URL to call the Netlify function (proxy)
+        // Make sure you're calling the Netlify function correctly
         const response = await fetch("/.netlify/functions/proxy");
 
         if (!response.ok) {
@@ -16,7 +16,10 @@ const SuperLeague = () => {
         }
 
         const data = await response.json();
-        setStandings(data.standings[0]?.table || []);
+        console.log("API Data:", data); // Log data for debugging
+
+        // Assuming the API response contains 'standings' as the field for the table data
+        setStandings(data.standings[0]?.table || []); // Update standings state
         setLoading(false);
       } catch (err) {
         console.error("Error fetching standings:", err.message);

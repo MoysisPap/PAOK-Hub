@@ -1,17 +1,14 @@
-// netlify/functions/proxy.js
-
-import fetch from "node-fetch"; // Import fetch to make requests
+import fetch from "node-fetch"; // Import fetch for making the request
 
 export const handler = async (event, context) => {
   const url =
-    "https://api.football-data.org/v4/competitions/PL/standings?season=2024"; // API URL
+    "https://api.football-data.org/v4/competitions/PL/standings?season=2024"; // Your API URL
 
   const headers = {
-    "X-Auth-Token": process.env.FOOTBALL_API_KEY, // Use environment variable for API key
+    "X-Auth-Token": process.env.VITE_API_KEY, // Get API key from environment variables
   };
 
   try {
-    // Make the request to the external API
     const response = await fetch(url, { headers });
     const data = await response.json();
 
