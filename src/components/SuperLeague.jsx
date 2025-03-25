@@ -9,7 +9,7 @@ const SuperLeague = () => {
     const fetchStandings = async () => {
       try {
         const response = await fetch(
-          "/football-api/v4/competitions/PL/standings?season=2024",
+          "https://api.football-data.org/v4/competitions/PL/standings?season=2024",
           {
             method: "GET",
             headers: {
