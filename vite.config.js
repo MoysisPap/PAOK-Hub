@@ -1,7 +1,9 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import dotenv from "dotenv";
 
-// https://vitejs.dev/config/
+dotenv.config();
+
 export default defineConfig({
   plugins: [react()],
   server: {
@@ -11,9 +13,8 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/football-api/, ""),
-        // Using environment variable for the API key
         configure: (proxy) => {
-          proxy.on("proxyReq", (proxyReq, req, res) => {
+          proxy.on("proxyReq", (proxyReq) => {
             proxyReq.setHeader("X-Auth-Token", process.env.VITE_API_KEY);
           });
         },

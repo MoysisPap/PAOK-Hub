@@ -5,26 +5,28 @@ const SuperLeague = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch Premier League standings for 2025 season (adjusted URL if needed)
   useEffect(() => {
     const fetchStandings = async () => {
       try {
         const response = await fetch(
-          "/football-api/v4/competitions/PL/standings?season=2024", // Updated to 2025 season
+          "/football-api/v4/competitions/PL/standings?season=2024",
           {
             method: "GET",
             headers: {
-              "X-Auth-Token": "7083bcc646ee421da3b53a90c205b78d", // Your API key
+              "X-Auth-Token": import.meta.env.VITE_API_KEY,
             },
           }
         );
+
         if (!response.ok) {
-          throw new Error("Failed to fetch standings");
+          throw new Error(`Failed to fetch standings: ${response.status}`);
         }
+
         const data = await response.json();
-        setStandings(data.standings[0].table); // Extract standings data
+        setStandings(data.standings[0]?.table || []);
         setLoading(false);
       } catch (err) {
+        console.error("Error fetching standings:", err.message);
         setError(err.message);
         setLoading(false);
       }
@@ -33,22 +35,15 @@ const SuperLeague = () => {
     fetchStandings();
   }, []);
 
-  if (loading) {
-    return <p>Loading standings...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
+  if (loading) return <p>Loading standings...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <div className="container max-w-5xl mx-auto">
-      {/* Title */}
       <h1 className="text-3xl font-rubik text-center text-neutral-100 mb-16">
         PAOK Hub Statistics
       </h1>
 
-      {/* Desktop Standings */}
       <div className="bg-white border border-gray-200 rounded-lg mx-4 md:mx-auto shadow-md mb-4 flex justify-center items-center">
         <img
           src="https://crests.football-data.org/PL.png"
@@ -57,6 +52,7 @@ const SuperLeague = () => {
         />
       </div>
 
+      {/* Desktop Standings */}
       <div className="hidden md:block bg-white border border-gray-200 rounded-lg shadow-md overflow-x-auto mb-8">
         <table className="min-w-full bg-white border border-gray-200 rounded-lg">
           <thead>
@@ -78,7 +74,7 @@ const SuperLeague = () => {
                 </td>
                 <td className="py-2 px-4 border-b flex items-center">
                   <img
-                    src={team.team.crest} // Corrected to use the crest field
+                    src={team.team.crest}
                     alt={`Logo of ${team.team.name}`}
                     className="w-8 h-8 mr-2"
                   />
@@ -108,7 +104,7 @@ const SuperLeague = () => {
           >
             <div className="flex items-center mb-4">
               <img
-                src={team.team.crest} // Corrected to use the crest field
+                src={team.team.crest}
                 alt={`Logo of ${team.team.name}`}
                 className="w-12 h-12 mr-4"
               />
@@ -122,31 +118,31 @@ const SuperLeague = () => {
             <div className="grid grid-cols-2 gap-4">
               <div className="text-center">
                 <h3 className="text-sm font-medium text-gray-800">Points</h3>
-                <p className=" text-gray-800 font-black">{team.points}</p>
+                <p className="text-gray-800 font-black">{team.points}</p>
               </div>
               <div className="text-center">
                 <h3 className="text-sm font-medium text-gray-800">
                   Goals Diff
                 </h3>
-                <p className=" text-gray-800">{team.goalDifference}</p>
+                <p className="text-gray-800">{team.goalDifference}</p>
               </div>
             </div>
             <div className="mt-4 grid grid-cols-2 gap-4">
               <div className="text-center">
                 <h3 className="text-sm font-medium text-gray-800">Played</h3>
-                <p className=" text-gray-800">{team.playedGames}</p>
+                <p className="text-gray-800">{team.playedGames}</p>
               </div>
               <div className="text-center">
                 <h3 className="text-sm font-medium text-gray-800">Wins</h3>
-                <p className=" text-gray-800">{team.won}</p>
+                <p className="text-gray-800">{team.won}</p>
               </div>
               <div className="text-center">
                 <h3 className="text-sm font-medium text-gray-800">Draws</h3>
-                <p className=" text-gray-800">{team.draw}</p>
+                <p className="text-gray-800">{team.draw}</p>
               </div>
               <div className="text-center">
                 <h3 className="text-sm font-medium text-gray-800">Losses</h3>
-                <p className=" text-gray-800">{team.lost}</p>
+                <p className="text-gray-800">{team.lost}</p>
               </div>
             </div>
           </div>
