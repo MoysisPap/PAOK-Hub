@@ -18,10 +18,10 @@ export default defineConfig([
   tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
   {
-    files: ["vite.config.js"], // Apply only to vite.config.js
+    files: ["vite.config.js"],
     languageOptions: {
       globals: {
-        ...globals.node, // Enable Node.js globals
+        ...globals.node,
       },
     },
   },

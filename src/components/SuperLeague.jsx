@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import standingsData from "./standings.json";
 
 const SuperLeague = () => {
   const [standings, setStandings] = useState([]);
@@ -6,34 +7,13 @@ const SuperLeague = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchStandings = async () => {
-      try {
-        const apiKey = import.meta.env.VITE_API_KEY; // Accessing the API key
-        if (!apiKey) {
-          throw new Error("API key is missing.");
-        }
-        const response = await fetch(
-          "/football-api/v4/competitions/PL/standings?season=2024",
-          {
-            method: "GET",
-            headers: {
-              "X-Auth-Token": apiKey, // Using the environment variable
-            },
-          }
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch standings");
-        }
-        const data = await response.json();
-        setStandings(data.standings[0].table);
-        setLoading(false);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
-      }
-    };
-
-    fetchStandings();
+    try {
+      setStandings(standingsData.standings[0].table);
+      setLoading(false);
+    } catch (err) {
+      setError(`Error: ${err.message}.  Failed to load local data.`);
+      setLoading(false);
+    }
   }, []);
 
   if (loading) {
@@ -41,17 +21,22 @@ const SuperLeague = () => {
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return (
+      <div
+        className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4"
+        role="alert"
+      >
+        <p className="font-bold">Warning:</p>
+        <p>{error}</p>
+      </div>
+    );
   }
 
   return (
     <div className="container max-w-5xl mx-auto">
-      {/* Title */}
       <h1 className="text-3xl font-rubik text-center text-neutral-100 mb-16">
         PAOK Hub Statistics
       </h1>
-
-      {/* Desktop Standings */}
       <div className="bg-white border border-gray-200 rounded-lg mx-4 md:mx-auto shadow-md mb-4 flex justify-center items-center">
         <img
           src="https://crests.football-data.org/PL.png"
@@ -102,7 +87,6 @@ const SuperLeague = () => {
         </table>
       </div>
 
-      {/* Mobile Standings */}
       <div className="md:hidden">
         {standings.map((team) => (
           <div
