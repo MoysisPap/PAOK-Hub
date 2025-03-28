@@ -8,12 +8,16 @@ const SuperLeague = () => {
   useEffect(() => {
     const fetchStandings = async () => {
       try {
+        const apiKey = import.meta.env.VITE_API_KEY; // Accessing the API key
+        if (!apiKey) {
+          throw new Error("API key is missing.");
+        }
         const response = await fetch(
           "/football-api/v4/competitions/PL/standings?season=2024",
           {
             method: "GET",
             headers: {
-              "X-Auth-Token": "7083bcc646ee421da3b53a90c205b78d",
+              "X-Auth-Token": apiKey, // Using the environment variable
             },
           }
         );

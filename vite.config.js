@@ -12,10 +12,13 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/football-api/, ""),
         configure: (proxy) => {
           proxy.on("proxyReq", (proxyReq) => {
-            proxyReq.setHeader(
-              "X-Auth-Token",
-              "7083bcc646ee421da3b53a90c205b78d"
-            ); // Direct API key here
+            const apiKey = process.env.VITE_API_KEY;
+
+            if (apiKey) {
+              proxyReq.setHeader("X-Auth-Token", apiKey);
+            } else {
+              console.error("API key is not set in environment variables.");
+            }
           });
         },
       },
